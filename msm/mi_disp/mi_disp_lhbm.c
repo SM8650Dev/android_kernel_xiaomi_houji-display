@@ -323,7 +323,7 @@ static int mi_disp_lhbm_fod_set_disp_param(struct disp_lhbm_fod *lhbm_fod, u32 l
 			else
 				ctl.feature_val = LOCAL_HBM_NORMAL_WHITE_110NIT;
 		} else {
-			DISP_ERROR("invalid target_brightness = %d\n", lhbm_fod->target_brightness);
+			DISP_ERROR("invalid target_brightness = %d\n", atomic_read(&lhbm_fod->target_brightness));
 		}
 		break;
 	case LHBM_TARGET_BRIGHTNESS_OFF_AUTH_STOP:
