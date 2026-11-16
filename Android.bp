@@ -1,3 +1,6 @@
+// Keep standalone vendor header modules out of the global HAL namespace.
+soong_namespace {}
+
 headers_src = [
     "include/uapi/*/**/*.h",
 ]
