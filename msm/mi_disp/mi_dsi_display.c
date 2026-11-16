@@ -720,7 +720,7 @@ int mi_dsi_display_set_mipi_rw(void *display, char *buf)
 			goto exit_free0;
 		}
 		if (tmp_data > sizeof(g_dsi_read_info.rx_buf)) {
-			DISP_ERROR("read size exceeding the limit %d\n",
+			DISP_ERROR("read size exceeding the limit %lu\n",
 					sizeof(g_dsi_read_info.rx_buf));
 			goto exit_free0;
 		}
@@ -1544,11 +1544,11 @@ ssize_t mi_dsi_display_read_manufacturer_info_by_globleparam(void *display,
 	}
 	info = &g_panel_manufaturer_info[mi_get_disp_id(dsi_display->display_type)];
 	memset(buf,0,size);
-	count += snprintf(buf + count, size - count, "%036s: %s\n",
+	count += snprintf(buf + count, size - count, "%36s: %s\n",
 				"wp_info",info->wp_info);
-	count += snprintf(buf + count, size - count, "%036s: %s\n",
+	count += snprintf(buf + count, size - count, "%36s: %s\n",
 				"max_brightness",info->maxbrightness);
-	count += snprintf(buf + count, size - count, "%036s: %s\n",
+	count += snprintf(buf + count, size - count, "%36s: %s\n",
 				"manufacturer_time",info->manufacturer_time);
 	return count;
 }

@@ -866,7 +866,7 @@ int mi_dsi_print_51_backlight_log(struct dsi_panel *panel,
 		}
 
 		if (mi_get_backlight_log_mask() & BACKLIGHT_LOG_ENABLE) {
-			DISP_INFO("[%s] [0x51 backlight debug] tx_len = %d\n",
+			DISP_INFO("[%s] [0x51 backlight debug] tx_len = %zu\n",
 					panel->type, cmd->msg.tx_len);
 			for (i = 0; i < cmd->msg.tx_len; i++) {
 				DISP_INFO("[%s] [0x51 backlight debug] tx_buf[%d] = 0x%02X\n",
@@ -1318,7 +1318,7 @@ int mi_dsi_panel_write_dsi_cmd_set(struct dsi_panel *panel,
 
 	for (i = 0; i < cmd_count; i++) {
 		memset(buffer, 0, buf_size);
-		buf_count = snprintf(buffer, buf_size, "%02X", cmds->msg.tx_len);
+		buf_count = snprintf(buffer, buf_size, "%02zX", cmds->msg.tx_len);
 		tx_buf = (u8 *)cmds->msg.tx_buf;
 		for (j = 0; j < cmds->msg.tx_len ; j++) {
 			buf_count += snprintf(buffer + buf_count,
@@ -1832,10 +1832,10 @@ static inline void mi_dsi_panel_cal_lhbm_param_N3(int type,
 		tmp = (update_val[i*2] << 8) | update_val[i*2+1];
 
 		if (type == N3_LHBMGREEN500NITS) {
-			DISP_DEBUG("G500 gamma update tmp[%d] * 1000 / %d\n", tmp, g500_dev[dev_index]);
+			DISP_DEBUG("G500 gamma update tmp[%llu] * 1000 / %d\n", tmp, g500_dev[dev_index]);
 			tmp = tmp * 1000 / g500_dev[dev_index];
 		} else if (type == N3_LHBM1000NITS) {
-			DISP_DEBUG("W1000 gamma update tmp[%d] * 100 / %d\n", tmp, w1000_dev[dev_index]);
+			DISP_DEBUG("W1000 gamma update tmp[%llu] * 100 / %d\n", tmp, w1000_dev[dev_index]);
 			tmp = tmp * 1000 / w1000_dev[dev_index];
 		}
 
@@ -3292,12 +3292,12 @@ ssize_t mi_dsi_panel_show_disp_param(struct dsi_panel *panel,
 		return -EAGAIN;
 	}
 
-	count = snprintf(buf, size, "%040s: feature vaule\n", "feature name[feature id]");
+	count = snprintf(buf, size, "%40s: feature vaule\n", "feature name[feature id]");
 
 	mutex_lock(&panel->panel_lock);
 	mi_cfg = &panel->mi_cfg;
 	for (i = DISP_FEATURE_DIMMING; i < DISP_FEATURE_MAX; i++) {
-		count += snprintf(buf + count, size - count, "%036s[%02d]: %d\n",
+		count += snprintf(buf + count, size - count, "%36s[%02d]: %d\n",
 				get_disp_feature_id_name(i), i, mi_cfg->feature_val[i]);
 
 	}

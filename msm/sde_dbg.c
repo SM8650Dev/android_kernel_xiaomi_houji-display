@@ -111,12 +111,12 @@
 
 #define SDE_DBG_LOG_ENTRY(off, x0, x4, x8, xc, log) \
 	if (log) \
-		dev_err(sde_dbg_base.dev, "0x%08x| %08x %08x %08x %08x\n", off, x0, x4, x8, xc)
+		dev_err(sde_dbg_base.dev, "0x%08lx| %08x %08x %08x %08x\n", (unsigned long)(off), x0, x4, x8, xc)
 
 #define SDE_DBG_LOG_DUMP_ADDR(name, addr, size, off, log) \
 	if (log) \
-		dev_err(sde_dbg_base.dev, "%s: start_addr:0x%pK len:0x%x offset=0x%lx\n", \
-				name, addr, size, off)
+		dev_err(sde_dbg_base.dev, "%s: start_addr:0x%pK len:0x%zx offset=0x%lx\n", \
+				name, addr, (size_t)(size), (unsigned long)(off))
 
 #define SDE_DBG_LOG_DEBUGBUS(name, addr, block_id, test_id, val) \
 	dev_err(sde_dbg_base.dev, "%s 0x%x %d %d 0x%x\n", name, addr, block_id, test_id, val)
@@ -535,7 +535,7 @@ static void _sde_dump_reg(const char *dump_name, u32 reg_dump_flag,
 
 		if (dump_addr && in_dump && sde_dbg_base.coredump_reading)
 			drm_printf(sde_dbg_base.sde_dbg_printer,
-				"0x%08x| %08x %08x %08x %08x\n",
+				"0x%08lx| %08x %08x %08x %08x\n",
 				(unsigned long)(addr - base_addr),
 				dump_addr[i * 4],
 				dump_addr[i * 4 + 1],
@@ -1842,7 +1842,7 @@ static int  _sde_dbg_recovery_dump_reg_blk(struct sde_dbg_reg_base *blk,
 	len += snprintf(buf + len, DUMP_LINE_SIZE,
 			"==========================================\n");
 	len += snprintf(buf + len, DUMP_LINE_SIZE,
-			"****** DUMP of %s block (0x%08x) ******\n",
+			"****** DUMP of %s block (0x%08lx) ******\n",
 			blk->name, blk->phys_addr);
 	len += snprintf(buf + len, DUMP_LINE_SIZE,
 			"count:%ld max-off:0x%lx has_sub_blk:%d\n",

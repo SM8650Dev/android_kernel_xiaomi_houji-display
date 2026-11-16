@@ -73,7 +73,7 @@ static void mi_dsi_panel_parse_gamma_read_config(struct dsi_panel *panel)
 	if (mi_cfg->update_gamma_befor_init && mi_get_panel_id(panel->mi_cfg.mi_panel_id) == N3_PANEL_PA) {
 		gamma_ptr = qcom_smem_get(QCOM_SMEM_HOST_ANY, SMEM_SW_DISPLAY_GAMMA_TABLE, &item_size);
 		if (!IS_ERR(gamma_ptr) && item_size > 0) {
-			DSI_INFO("gamma data size %d\n", item_size);
+			DSI_INFO("gamma data size %zu\n", item_size);
 			memcpy(mi_cfg->gamma_rgb_param, gamma_ptr, item_size);
 			for (i = 4; i < item_size; i += 2) {
 				tmp = ((mi_cfg->gamma_rgb_param[i-1]) << 8) | mi_cfg->gamma_rgb_param[i];
@@ -133,7 +133,7 @@ static void mi_dsi_panel_parse_lhbm_config(struct dsi_panel *panel)
 	if (mi_get_panel_id(panel->mi_cfg.mi_panel_id) == N2_PANEL_PA) {
 		lhbm_ptr = qcom_smem_get(QCOM_SMEM_HOST_ANY, SMEM_SW_DISPLAY_LHBM_TABLE, &item_size);
 		if (!IS_ERR(lhbm_ptr) && item_size > 0) {
-			DSI_INFO("lhbm data size %d\n", item_size);
+			DSI_INFO("lhbm data size %zu\n", item_size);
 			memcpy(mi_cfg->lhbm_param, lhbm_ptr, item_size);
 			for (i = 1; i < item_size; i += 2) {
 				tmp = ((mi_cfg->lhbm_param[i-1]) << 8) | mi_cfg->lhbm_param[i];
@@ -150,7 +150,7 @@ static void mi_dsi_panel_parse_lhbm_config(struct dsi_panel *panel)
 	} else if (mi_get_panel_id(panel->mi_cfg.mi_panel_id) == N3_PANEL_PA) {
 		lhbm_ptr = qcom_smem_get(QCOM_SMEM_HOST_ANY, SMEM_SW_DISPLAY_LHBM_TABLE, &item_size);
 		if (!IS_ERR(lhbm_ptr) && item_size > 0) {
-			DSI_INFO("lhbm data size %d\n", item_size);
+			DSI_INFO("lhbm data size %zu\n", item_size);
 			memcpy(mi_cfg->lhbm_rgb_param, lhbm_ptr, item_size);
 			for (i = 3; i < item_size; i += 2) {
 				tmp = ((mi_cfg->lhbm_rgb_param[i-1]) << 8) | mi_cfg->lhbm_rgb_param[i];

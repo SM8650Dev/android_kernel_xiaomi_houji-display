@@ -4777,7 +4777,7 @@ static int _sde_kms_get_demura_plane_data(struct sde_splash_data *data)
 			continue;
 
 		} else if (!mem->splash_buf_base || !mem->splash_buf_size) {
-			SDE_ERROR("mem for disp %d invalid: add:%lx size:%lx\n",
+			SDE_ERROR("mem for disp %d invalid: add:%lx size:%x\n",
 					(i+1), mem->splash_buf_base,
 					mem->splash_buf_size);
 			continue;

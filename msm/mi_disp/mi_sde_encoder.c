@@ -117,7 +117,7 @@ ssize_t mi_sde_encoder_calc_hw_vsync_info(struct dsi_display *display,
 	/* Multiplying with 1000 to get fps in floating point */
 	calc_vsync->measured_fps_x1000 =
 			(u32)((NSEC_PER_SEC * 1000) / calc_vsync->measured_vsync_period_ns);
-	DISP_INFO("[hw_vsync_info]fps: %d.%d, vsync_period_ns:%lld,"
+	DISP_INFO("[hw_vsync_info]fps: %llu.%llu, vsync_period_ns:%lld,"
 			" panel_mode:%s, panel_type:%s, average of %d statistics\n",
 			calc_vsync->measured_fps_x1000 / 1000,
 			calc_vsync->measured_fps_x1000 % 1000,
@@ -126,7 +126,7 @@ ssize_t mi_sde_encoder_calc_hw_vsync_info(struct dsi_display *display,
 			display->panel->type,
 			valid_count ? valid_count : count);
 
-	return scnprintf(buf, size, "fps: %d.%d vsync_period_ns:%lld"
+	return scnprintf(buf, size, "fps: %llu.%llu vsync_period_ns:%lld"
 			" panel_mode:%s panel_type:%s\n",
 			calc_vsync->measured_fps_x1000 / 1000,
 			calc_vsync->measured_fps_x1000 % 1000,
