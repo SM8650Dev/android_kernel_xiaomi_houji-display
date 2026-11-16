@@ -1532,7 +1532,7 @@ int mi_dsi_panel_write_dsi_cmd(struct dsi_panel *panel,
 	} else if (ctl->tx_state == MI_DSI_CMD_HS_STATE) {
 		cmd_sets.state = DSI_CMD_SET_STATE_HS;
 	} else {
-		DISP_ERROR("[%s] command state unrecognized-%s\n",
+		DISP_ERROR("[%s] command state unrecognized-%u\n",
 			panel->type, cmd_sets.state);
 		goto exit_free1;
 	}
