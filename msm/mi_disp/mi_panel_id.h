@@ -20,6 +20,7 @@
 */
 #define N2_42_02_0A_PANEL_ID   0x00004E3200420200
 #define N3_42_0D_0A_PANEL_ID   0x00004E3300420D00
+#define N3_42_0D_0A_CN_PANEL_ID 0x00004E3300420D0A
 
 /* PA: Primary display, First selection screen
  * PB: Primary display, Second selection screen
@@ -55,6 +56,7 @@ static inline enum mi_project_panel_id mi_get_panel_id(u64 mi_panel_id)
 	case N2_42_02_0A_PANEL_ID:
 		return N2_PANEL_PA;
 	case N3_42_0D_0A_PANEL_ID:
+	case N3_42_0D_0A_CN_PANEL_ID:
 		return N3_PANEL_PA;
 	default:
 		return PANEL_ID_INVALID;
